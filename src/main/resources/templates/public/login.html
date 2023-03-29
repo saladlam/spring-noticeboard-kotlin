@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="|#{applicationName} - #{login}|"></title>
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui header" th:text="#{login}"></h2>
+    <form method="post" th:action="@{/loginHandler}" class="ui large form">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="username" th:placeholder="#{username}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" th:placeholder="#{password}">
+          </div>
+        </div>
+        <button class="ui fluid large submit green button" th:text="#{login}"></button>
+      </div>
+      <div th:if="${error == true and session.SPRING_SECURITY_LAST_EXCEPTION != null}" class="ui error message" style="display: block;">
+        <div th:text="#{loginFailed}"></div>
+        <div th:text="|#{reason}: ${session.SPRING_SECURITY_LAST_EXCEPTION.message}|"></div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

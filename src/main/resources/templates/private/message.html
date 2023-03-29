@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <title th:text="#{applicationName} + ' - ' + ${isEdit}? #{editMessage}: #{newMessage}"></title>
+  <meta charset="utf-8">
+  <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+<div class="ui container">
+  <h4 th:text="${isEdit}? #{editMessage}: #{newMessage}"></h4>
+  <form th:action="@{/manage/__${postHandler}__}" method="post" th:object="${message}" class="ui form">
+    <fieldset>
+      <legend th:text="#{message}"></legend>
+      <div class="field">
+        <label th:text="#{message.publishDate}"></label>
+        <input id="edPublishDate" type="text" th:field="*{publishDate}" />
+      </div>
+      <div class="field">
+        <label th:text="#{message.removeDate}"></label>
+        <input id="edRemoveDate" type="text" th:field="*{removeDate}" />
+      </div>
+      <div class="field">
+        <label th:text="#{message.description}"></label>
+        <textarea id="edDescription" name="description" th:text="*{description}"></textarea>
+      </div>
+      <button id="edSave" class="ui mini primary button" th:text="#{save}"> <i class="send icon"></i></button>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>
